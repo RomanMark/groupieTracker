@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Groupie-Tracker</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        a.one {
+            font-size: 60px;
+            color: rgb(46, 46, 46);
+            text-decoration: none;
+        }
+        a.one:hover {
+            color: rgb(90, 89, 89);
+        }
+        .image {
+            font-size: 20px;
+            border: none;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center;
+            width: 300px;
+            border-radius: 50%;
+            height: 300px;
+            text-align: center;
+            display: inline-block;
+            background-clip: content-box;
+            box-shadow: inset 0 0 0 30px rgb(255, 255, 255);
+            margin: 10px;
+        }
+        .groups {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .group {
+            width: 33.33%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .card-body {
+            margin-top: 10px;
+        }
+    </style>
+    
+  </head>
+  <body>
+    <main>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <a class="one" href="http://localhost:8060/" title="go to main page">Groupie-Tracker</a>
+                    <br>
+                    <div class="groups">
+                        {{ range . }}
+                        <div class="group">
+                            <div class="image"
+                                style='background-image: url({{.Image}});'><br><br><br><br><br><br><br><br><br><br><br><br>{{.Name}}
+                            </div>
+                            <div class="card-body">
+                                <form action="/artist/{{.Id}}/{{.Name}}" method="post">
+                                    <input type="hidden" name="id" value="{{.Id}}">
+                                    <input type="hidden" name="name" value="{{.Name}}">
+                                    <button type="submit">More information</button>
+                                </form>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
